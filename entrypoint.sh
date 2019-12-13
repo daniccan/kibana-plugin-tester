@@ -56,7 +56,7 @@ echo "network.host: 0.0.0.0" >> config/elasticsearch.yml
 bin/elasticsearch &
 cd ..
 
-echo -e "$INFO_COLOR Waiting for Elasticsearch to start. $LOG_END"
+echo -e "$INFO_COLOR Waiting for Elasticsearch to Start. $LOG_END"
 status_code=-1
 while [ "$status_code" -ne 200 ]
 do
@@ -96,7 +96,7 @@ echo -e "$INFO_COLOR Install Kibana Plugin. $LOG_END"
 
 bin/kibana-plugin install file:///kibana-plugin/$PLUGIN_FILE_NAME &
 
-echo -e "$INFO_COLOR Waiting for Kibana Plugin installation to complete. $LOG_END"
+echo -e "$INFO_COLOR Waiting for Kibana Plugin Installation to Complete. $LOG_END"
 log_count=0
 while [ "$log_count" -eq 0 ]
 do
@@ -118,7 +118,7 @@ echo -e "$SUCCESS_COLOR Kibana Plugin Installed Successfully. $LOG_END"
 
 bin/kibana &
 
-echo -e "$INFO_COLOR Waiting for Kibana to start. $LOG_END"
+echo -e "$INFO_COLOR Waiting for Kibana to Start. $LOG_END"
 status_code=-1
 while [ "$status_code" -ne 302 ]
 do
@@ -132,8 +132,8 @@ echo -e "$SUCCESS_COLOR Kibana Started Successfully. $LOG_END"
 
 echo $NEW_LINE
 
-echo -e "$SUCCESS_COLOR Kibana Plugin Deploy Completed. Visit Kibana UI to test your plugin. $LOG_END"
+echo -e "$SUCCESS_COLOR Kibana Plugin Deploy Completed. Visit Kibana UI to Test your Plugin. $LOG_END"
 
-echo -e "$INFO_COLOR Displaying logs for Kibana. $LOG_END"
+echo -e "$INFO_COLOR Displaying logs for Kibana: $LOG_END"
 
 tail -500f logs/kibana.log
