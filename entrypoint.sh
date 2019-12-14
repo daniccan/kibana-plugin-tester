@@ -52,6 +52,7 @@ fi
 cd elasticsearch-$KIBANA_VERSION
 
 echo "network.host: 0.0.0.0" >> config/elasticsearch.yml
+echo "discovery.type: single-node" >> config/elasticsearch.yml
 
 bin/elasticsearch &
 cd ..
@@ -96,27 +97,36 @@ echo -e "$INFO_COLOR Install Kibana Plugin. $LOG_END"
 
 bin/kibana-plugin install file:///kibana-plugin/$PLUGIN_FILE_NAME &
 
+echo $NEW_LINE
+
 echo -e "$INFO_COLOR Waiting for Kibana Plugin Installation to Complete. $LOG_END"
 log_count=0
-while [ "$log_count" -eq 0 ]
+kibana_install_pid=0
+while [ "$log_count" -eq 0 ] && ! [ -z "$kibana_install_pid" ]
 do
     if [ -f "logs/kibana.log" ]
         then
             log_count=`cat logs/kibana.log | grep -i 'Optimization' | grep -i 'complete' | wc -l`
+    else
+        kibana_install_pid=`ps -eaf | grep -i 'kibana' | grep -i 'install' | awk '{print $2}'`
     fi
     printf '.'
     sleep 2
 done
 
-kibana_install_pid=`ps -eaf | grep -i 'kibana' | grep -i 'install' | awk '{print $2}'`
-kill $kibana_install_pid
-wait $kibana_install_pid 2>/dev/null
+if ! [ -z "$kibana_install_pid" ]
+    then
+        kill $kibana_install_pid
+        wait $kibana_install_pid 2>/dev/null
+fi
 
 echo $NEW_LINE
 
 echo -e "$SUCCESS_COLOR Kibana Plugin Installed Successfully. $LOG_END"
 
 bin/kibana &
+
+echo $NEW_LINE
 
 echo -e "$INFO_COLOR Waiting for Kibana to Start. $LOG_END"
 status_code=-1
@@ -133,6 +143,8 @@ echo -e "$SUCCESS_COLOR Kibana Started Successfully. $LOG_END"
 echo $NEW_LINE
 
 echo -e "$SUCCESS_COLOR Kibana Plugin Deploy Completed. Visit Kibana UI to Test your Plugin. $LOG_END"
+
+echo $NEW_LINE
 
 echo -e "$INFO_COLOR Displaying logs for Kibana: $LOG_END"
 
