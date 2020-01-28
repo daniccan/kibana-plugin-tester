@@ -24,6 +24,13 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_FILE_
 - **Elasticsearch:** http://localhost:9200
 - **Kibana:** http://localhost:5601
 
+### Supported Kibana Versions
+
+| Major Version        | Minor Version(s)           |
+|----------------------|----------------------------|
+| 6.x                  | 6.5.x, 6.6.x, 6.7.x, 6.8.x |
+| 7.x                  | 7.0.x, 7.1.x               |
+
 ### Issues
 
 Find any bugs or need additional features? Please don't hesitate to [create an issue](https://github.com/daniccan/kibana-plugin-tester/issues/new?assignees=&labels=&template=issue.md&title=).
