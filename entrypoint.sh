@@ -16,9 +16,9 @@ if [ -z "$KIBANA_VERSION" ]
         exit 1
 fi
 
-if [ -z "$PLUGIN_FILE_NAME" ]
+if [ -z "$PLUGIN_FILE_NAME" ] && [ -z "$PLUGIN_URL" ]
     then
-        echo -e "$ERROR_COLOR PLUGIN_FILE_NAME environment variable is required. $LOG_END"
+        echo -e "$ERROR_COLOR PLUGIN_FILE_NAME / PLUGIN_URL environment variable is required. $LOG_END"
         exit 1
 fi
 
@@ -95,7 +95,12 @@ echo "logging.dest: /home/ubuntu/kibana-$KIBANA_VERSION-linux-x86_64/logs/kibana
 
 echo -e "$INFO_COLOR Install Kibana Plugin. $LOG_END"
 
-bin/kibana-plugin install file:///kibana-plugin/$PLUGIN_FILE_NAME &
+if [ -n "$PLUGIN_URL" ]
+    then
+        bin/kibana-plugin install $PLUGIN_URL &
+else
+    bin/kibana-plugin install file:///kibana-plugin/$PLUGIN_FILE_NAME &
+fi
 
 echo $NEW_LINE
 

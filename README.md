@@ -9,14 +9,28 @@ A Docker image to deploy and test plugins for any given version of [Kibana](http
 
 ### Usage
 
+#### Install Plugin from File
+
 ```bash
 docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PLUGIN_FILE_NAME=$PLUGIN_FILE_NAME -v $KIBANA_PLUGIN_PATH:/kibana-plugin --rm daniccan/kibana-plugin-tester
 ```
 
-### Example
+#### Example
 
 ```bash
 docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_FILE_NAME=my_plugin.zip -v /home/username/my_plugin:/kibana-plugin --rm daniccan/kibana-plugin-tester
+```
+
+#### Install Plugin from URL
+
+```bash
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PLUGIN_URL=$PLUGIN_URL --rm daniccan/kibana-plugin-tester
+```
+
+#### Example
+
+```bash
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_URL=https://mydomain.com/kibana_plugins/my_plugin.zip --rm daniccan/kibana-plugin-tester
 ```
 
 ### URLs
