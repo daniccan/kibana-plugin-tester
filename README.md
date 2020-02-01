@@ -38,6 +38,15 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_URL=h
 - **Elasticsearch:** http://localhost:9200
 - **Kibana:** http://localhost:5601
 
+### Environment Variables
+
+| Environment Variable | Required | Description                                                                                              |
+|----------------------|----------|----------------------------------------------------------------------------------------------------------|
+| KIBANA_VERSION       | True     | Version of elastic / kibana to be installed.                                                             |
+| PLUGIN_FILE_NAME     | False    | The name of the plugin file. The plugin directory has to be set as a Volume mount if this option is set. |
+| PLUGIN_URL           | False    | The URL of the plugin.                                                                                   |
+| NODE_OPTIONS         | False    | Sets the memory for kibana during plugin installation.                                                   |
+
 ### Supported Kibana Versions
 
 | Major Version        | Minor Version(s)           |

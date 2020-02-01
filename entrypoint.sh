@@ -54,6 +54,9 @@ cd elasticsearch-$KIBANA_VERSION
 echo "network.host: 0.0.0.0" >> config/elasticsearch.yml
 echo "discovery.type: single-node" >> config/elasticsearch.yml
 
+sed -i 's/-Xms1g/-Xms128m/g' config/jvm.options
+sed -i 's/-Xmx1g/-Xmx128m/g' config/jvm.options
+
 bin/elasticsearch &
 cd ..
 
