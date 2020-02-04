@@ -54,8 +54,21 @@ cd elasticsearch-$KIBANA_VERSION
 echo "network.host: 0.0.0.0" >> config/elasticsearch.yml
 echo "discovery.type: single-node" >> config/elasticsearch.yml
 
-sed -i 's/-Xms1g/-Xms128m/g' config/jvm.options
-sed -i 's/-Xmx1g/-Xmx128m/g' config/jvm.options
+if [ -n "$ES_OPTIONS" ]
+    then
+        IFS=' '
+        read -ra es_opts <<< "$ES_OPTIONS"
+        for opt in "${es_opts[@]}"
+        do
+	        if [[ $opt = -Xms* ]]
+                then
+                    sed -i "s/-Xms1g/$opt/g" config/jvm.options
+            elif [[ $opt = -Xmx* ]]
+                then
+                    sed -i "s/-Xmx1g/$opt/g" config/jvm.options
+            fi
+        done
+fi
 
 bin/elasticsearch &
 cd ..

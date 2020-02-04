@@ -18,7 +18,7 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PL
 #### Example
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_FILE_NAME=my_plugin.zip -v /home/username/my_plugin:/kibana-plugin --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_FILE_NAME=my_plugin.zip -v /home/username/my_plugin:/kibana-plugin --rm daniccan/kibana-plugin-tester
 ```
 
 #### Install Plugin from URL
@@ -30,7 +30,7 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PL
 #### Example
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_URL=https://mydomain.com/kibana_plugins/my_plugin.zip --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_URL=https://mydomain.com/kibana_plugins/my_plugin.zip --rm daniccan/kibana-plugin-tester
 ```
 
 ### URLs
@@ -40,12 +40,13 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.5.0 -e PLUGIN_URL=h
 
 ### Environment Variables
 
-| Environment Variable | Required | Description                                                                                              |
-|----------------------|----------|----------------------------------------------------------------------------------------------------------|
-| KIBANA_VERSION       | True     | Version of elastic / kibana to be installed.                                                             |
-| PLUGIN_FILE_NAME     | False    | The name of the plugin file. The plugin directory has to be set as a Volume mount if this option is set. |
-| PLUGIN_URL           | False    | The URL of the plugin.                                                                                   |
-| NODE_OPTIONS         | False    | Sets the memory for kibana during plugin installation.                                                   |
+| Environment Variable | Required | Description                                             | Example                                           |
+|----------------------|----------|---------------------------------------------------------|---------------------------------------------------|
+| KIBANA_VERSION       | True     | Version of elastic / kibana to be installed.            | 7.1.0                                             |
+| ES_OPTIONS           | False    | Sets the memory for elasticsearch.                      | -Xms512m -Xmx512m                                 |
+| PLUGIN_FILE_NAME     | False    | The name of the plugin file.                            | my_plugin.zip                                     |
+| PLUGIN_URL           | False    | The URL of the plugin.                                  | https://example.mydomain.com/kibana/my_plugin.zip |
+| NODE_OPTIONS         | False    | Sets the memory for kibana during plugin installation.  | --max-old-space-size=2048                         |    
 
 ### Supported Kibana Versions
 
