@@ -12,25 +12,25 @@ A Docker image to deploy and test plugins for any given version of [Kibana](http
 #### Install Plugin from File
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PLUGIN_FILE_NAME=$PLUGIN_FILE_NAME -v $KIBANA_PLUGIN_PATH:/kibana-plugin --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=<KIBANA_VERSION> -e PLUGIN_FILE_NAME=<PLUGIN_FILE_NAME> -v <KIBANA_PLUGIN_PATH>:/kibana-plugin --rm daniccan/kibana-plugin-tester
 ```
 
 #### Example
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_FILE_NAME=my_plugin.zip -v /home/username/my_plugin:/kibana-plugin --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.6.0 -e PLUGIN_FILE_NAME=my_plugin.zip -v /home/username/my_plugin:/kibana-plugin --rm daniccan/kibana-plugin-tester
 ```
 
 #### Install Plugin from URL
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=$KIBANA_VERSION -e PLUGIN_URL=$PLUGIN_URL --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=<KIBANA_VERSION> -e PLUGIN_URL=<PLUGIN_URL> --rm daniccan/kibana-plugin-tester
 ```
 
 #### Example
 
 ```bash
-docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_URL=https://mydomain.com/kibana_plugins/my_plugin.zip --rm daniccan/kibana-plugin-tester
+docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.6.0 -e PLUGIN_URL=https://mydomain.com/kibana_plugins/my_plugin.zip --rm daniccan/kibana-plugin-tester
 ```
 
 ### URLs
@@ -42,7 +42,7 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_URL=h
 
 | Environment Variable | Required | Description                                             | Example                                           |
 |----------------------|----------|---------------------------------------------------------|---------------------------------------------------|
-| KIBANA_VERSION       | True     | Version of elastic / kibana to be installed.            | 7.1.0                                             |
+| KIBANA_VERSION       | True     | Version of elastic / kibana to be installed.            | 7.6.0                                             |
 | ES_OPTIONS           | False    | Sets the memory for elasticsearch.                      | -Xms512m -Xmx512m                                 |
 | PLUGIN_FILE_NAME     | False    | The name of the plugin file.                            | my_plugin.zip                                     |
 | PLUGIN_URL           | False    | The URL of the plugin.                                  | https://example.mydomain.com/kibana/my_plugin.zip |
@@ -50,10 +50,10 @@ docker run -it -p 9200:9200 -p 5601:5601 -e KIBANA_VERSION=7.1.0 -e PLUGIN_URL=h
 
 ### Supported Kibana Versions
 
-| Major Version        | Minor Version(s)           |
-|----------------------|----------------------------|
-| 6.x                  | 6.5.x, 6.6.x, 6.7.x, 6.8.x |
-| 7.x                  | 7.0.x, 7.1.x               |
+| Major Version        | Minor Version(s)                                 |
+|----------------------|--------------------------------------------------|
+| 6.x                  | 6.5.x, 6.6.x, 6.7.x, 6.8.x                       |
+| 7.x                  | 7.0.x, 7.1.x, 7.2.x, 7.3.x, 7.4.x, 7.5.x         |
 
 ### Issues
 
